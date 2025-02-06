@@ -58,4 +58,4 @@ if st.button("Borrar archivos"):
     st.session_state.archivo1 = None
     st.session_state.archivo2 = None
     st.session_state.output = None
-    st.experimental_rerun()
+    st.rerun()
