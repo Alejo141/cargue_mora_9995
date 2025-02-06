@@ -2,10 +2,10 @@ import pandas as pd
 import streamlit as st
 import io
 
-st.title("Actualización de VALOR_MORA en CSV")
+st.title("Generar formato IUF1")
 
 # Cargar archivos desde el usuario
-archivo1 = st.file_uploader("Cargar archivo con 'Saldo de Factura'", type=['csv'])
+archivo1 = st.file_uploader("Cargar archivo de la Mora", type=['csv'])
 archivo2 = st.file_uploader("Cargar archivo a actualizar", type=['csv'])
 
 if archivo1 and archivo2:
