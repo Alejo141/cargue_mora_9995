@@ -2,24 +2,13 @@ import pandas as pd
 import streamlit as st
 import io
 
-st.title("Actualización de VALOR_MORA en CSV")
+st.title("Generar formato IUF1")
 
 # Cargar archivos desde el usuario
-archivo1 = st.file_uploader("Cargar archivo con 'Saldo de Factura'", type=['csv'])
+archivo1 = st.file_uploader("Cargar archivo de la Mora", type=['csv'])
 archivo2 = st.file_uploader("Cargar archivo a actualizar", type=['csv'])
 
-# Inicializar estado de sesión para los archivos
-if 'archivo1' not in st.session_state:
-    st.session_state.archivo1 = None
-if 'archivo2' not in st.session_state:
-    st.session_state.archivo2 = None
-if 'output' not in st.session_state:
-    st.session_state.output = None
-
 if archivo1 and archivo2:
-    st.session_state.archivo1 = archivo1
-    st.session_state.archivo2 = archivo2
-    
     # Leer los archivos CSV
     df1 = pd.read_csv(archivo1)
     df2 = pd.read_csv(archivo2)
@@ -42,20 +31,10 @@ if archivo1 and archivo2:
     df2.to_csv(output, index=False, encoding='utf-8')
     output.seek(0)
     
-    # Guardar el buffer en el estado de sesión
-    st.session_state.output = output
-    
     # Obtener el nombre del archivo original y modificarlo
     archivo2_nombre = "IUF1_" + archivo2.name
     
     # Botón para descargar el archivo actualizado
-    st.download_button(label="Descargar archivo actualizado", data=st.session_state.output, file_name=archivo2_nombre, mime="text/csv")
+    st.download_button(label="Descargar archivo actualizado", data=output, file_name=archivo2_nombre, mime="text/csv")
     
     st.success("Actualización completada.")
-
-# Botón para borrar los archivos cargados y el archivo a descargar
-if st.button("Borrar archivos"):
-    st.session_state.archivo1 = None
-    st.session_state.archivo2 = None
-    st.session_state.output = None
-    st.rerun()
