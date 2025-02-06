@@ -31,7 +31,10 @@ if archivo1 and archivo2:
     df2.to_csv(output, index=False, encoding='utf-8')
     output.seek(0)
     
+    # Obtener el nombre del archivo original y modificarlo
+    archivo2_nombre = "IUF1_" + archivo2.name
+    
     # Botón para descargar el archivo actualizado
-    st.download_button(label="Descargar archivo actualizado", data=output, file_name="IUF1_122024.csv", mime="text/csv")
+    st.download_button(label="Descargar archivo actualizado", data=output, file_name=archivo2_nombre, mime="text/csv")
     
     st.success("Actualización completada.")
